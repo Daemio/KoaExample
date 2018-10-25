@@ -1,0 +1,7 @@
+{
+    "db":{
+        "host":"localhost:27017/hospital_db",
+        "user":"",
+        "password":""
+    }
+}
