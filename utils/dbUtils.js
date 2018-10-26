@@ -71,11 +71,11 @@ function getSeance(id) {
 }
 
 function appointSeance({seance_id, user_id}) {
-    return Seance.findByIdAndUpdate(seance_id, {$set: {user_id, available: false}}).exec();
+    return Seance.findOneAndUpdate(seance_id, {$set: {user_id, available: false}}).exec();
 }
 
 function cancelSeance(seance_id) {
-    return Seance.findByIdAndUpdate(seance_id, {$set: {user_id: null, available: true}}).exec();
+    return Seance.findOneAndUpdate(seance_id, {$set: {user_id: null, available: true}}).exec();
 }
 
 module.exports = {connect, disconnect, createUser,
