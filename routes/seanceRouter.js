@@ -1,11 +1,12 @@
 const Router = require('koa-router');
 const {appointSeance, cancelSeance, getSeance} = require('../utils/dbUtils');
+const notify = require('../middleware/notify');
 
 const seanceRouter = new Router();
 
 seanceRouter.post('/appoint_seance',
     paramsValidationMiddleware, 
-    async (ctx) => { //по-хорошему id юзера нужно брать из токена
+    async (ctx, next) => { //по-хорошему id юзера нужно брать из токена
         //предварительно пройдя middleware аутентификации и вообще как минимум посты должны быть защищенными
         try {
             const seance = await getSeance(ctx.seance_id);
@@ -24,13 +25,15 @@ seanceRouter.post('/appoint_seance',
                 user_id: ctx.user_id
             });
 
+            await next(ctx);
             ctx.status = 200;
             ctx.body = {message: "Successfully appointed seance", seance_id: seance._id}
         } catch (error) {
             ctx.status = 500;
             ctx.body = {message: "Error: Could not appoint seance", error}
         }
-    });
+    },
+    notify);
 
 seanceRouter.post('/cancel_seance', 
     paramsValidationMiddleware,
