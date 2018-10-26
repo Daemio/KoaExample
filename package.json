@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "node index.js",
+    "devserver": "nodemon index.js",
     "prefill": "node utils/prefill.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,7 +28,9 @@
     "koa": "^2.6.1",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
-    "mongoose": "^5.3.6"
+    "moment": "^2.22.2",
+    "mongoose": "^5.3.6",
+    "winston": "^3.1.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
